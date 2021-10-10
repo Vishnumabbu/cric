@@ -18,14 +18,11 @@ function ProductDetail(props){
     const addToCartHandler = ()=>{
         console.log('Cart');
 
-
-
         dispatch(addToCart(Product[0]._id)).then(res=>{
             console.log(res.payload.data.success);
             history.push('/cart');
         }
         );
-
 
     }
 
@@ -48,9 +45,9 @@ function ProductDetail(props){
     },[]);
 
     return(
-        <div style={{display:"flex",justifyContent:'center',alignItems:'center'}}>
+        <div style={{marginTop : 130,marginBottom: 30,display:"flex",justifyContent:'center',alignItems:'center'}}>
             {Product.length===0?<div>{console.log('hello')}</div>:
-            <div style={{marginTop:"90px",width:"350px",height:"350px"}}>
+            <div style={{marginTop:"90px",width:"350px"}}>
                 <h1>{Product[0].title}</h1>
                 <Card
                 hoverable={true}
@@ -59,8 +56,8 @@ function ProductDetail(props){
                 </Card>
 
             <Descriptions title="Product Info">
-                <Descriptions.Item label="Price"> {Product[0].price}</Descriptions.Item>
-                <Descriptions.Item label="Sold">{Product[0].stock}</Descriptions.Item>
+                <Descriptions.Item label="Price"> ${Product[0].price}</Descriptions.Item>
+                <Descriptions.Item label="Sold">{Product[0].sold}</Descriptions.Item>
               
                 <Descriptions.Item label="Description"> {Product[0].description}</Descriptions.Item>
             </Descriptions>

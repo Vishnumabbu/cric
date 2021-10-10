@@ -61,7 +61,7 @@ function LandingPage(){
             >
                 <Meta
                     title={product.title}
-                    description={`Rs ${product.price}`}
+                    description={`$ ${product.price}`}
                 />
                
             </Card>
@@ -78,7 +78,7 @@ function LandingPage(){
 
         else help.splice(filter.indexOf(num),1);
 
-        console.log(help);
+        // console.log(help);
 
         setFilter([...help]);
         const change = [...start];
@@ -117,13 +117,13 @@ function LandingPage(){
 
     return (
     
-        <div  style={{ width: '75%', margin: '0rem auto' }}>
+        <div  style={{ width: '75%', margin: '0rem auto',marginTop:"160px",marginBottom:30 }}>
 
             <div style={{ textAlign: 'center'}}>
                 <h2>    Products  </h2>
             </div>
 
-            <div style={{marginTop:"60px"}} >
+            <div style={{marginTop:"30px"}} >
                 <Checkbox type="checkbox" checked={filter.indexOf(1)===-1?false:true} onChange={()=>handleChange(1)}>Bat</Checkbox>
                 <Checkbox type="checkbox" checked={filter.indexOf(2)===-1?false:true} onChange={()=>handleChange(2)}>Ball</Checkbox>
                 <Checkbox type="checkbox" checked={filter.indexOf(3)===-1?false:true} onChange={()=>handleChange(3)}>Stumps</Checkbox>

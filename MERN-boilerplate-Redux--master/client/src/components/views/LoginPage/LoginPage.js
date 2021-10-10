@@ -12,7 +12,7 @@ import { Button } from 'antd';
 function LoginPage(props) {
   const store = useSelector((state) => state);
 
-  console.log(store);
+  // console.log(store);
 
   let history = useHistory();
 
@@ -36,7 +36,8 @@ function LoginPage(props) {
 
     dispatch(loginUser(values)).then((res) => {
       if (res.payload.data.loginSuccess === true) {
-        console.log(res);
+        // console.log(res);
+        console.log('LoginPage 40')
         history.push("/");
       } else {
         alert("Check your email or password again");
@@ -45,7 +46,7 @@ function LoginPage(props) {
   };
 
   return (
-    <div className="App-header">
+    <div style={{ width: '75%', margin: '0rem auto',marginTop:"160px",marginBottom:30}}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -53,14 +54,14 @@ function LoginPage(props) {
       >
         {(formik) => {
           return (
-            <Form className="">
-              <h3 style={{ color: "Black" }}>Login</h3>
+            <Form className="container">
+              <h3>Login</h3>
               <div className="form-control row">
                 <label style={{ color: "white" }} htmlFor="email">
-                  email
+                  {/* email */}
                 </label>
                 <br />
-                <Field type="email" id="email" name="email"></Field>
+                <Field placeholder="email" type="email" id="email" name="email"></Field>
                 <ErrorMessage name="email">
                   {(error) => (
                     <div style={{ color: "red", fontSize: "12px" }}>
@@ -72,10 +73,10 @@ function LoginPage(props) {
 
               <div className="form-control row">
                 <label style={{ color: "white" }} htmlFor="password">
-                  password
+                  {/* password */}
                 </label>
                 <br />
-                <Field type="password" id="password " name="password"></Field>
+                <Field placeholder="password" type="password" id="password " name="password"></Field>
                 <ErrorMessage name="password">
                   {(error) => (
                     <div style={{ color: "red", fontSize: "12px" }}>
@@ -86,7 +87,7 @@ function LoginPage(props) {
               </div>
 
               <div className="form-control row">
-                <button type="submit" disabled={!formik.isValid}>
+                <button style={{marginTop:'20px',backgroundColor:'#FF5733',color:'white',borderRadius:'5px'}} type="submit" disabled={!formik.isValid} >
                   Login
                 </button>
                 {/* <Button type="submit" disabled={!formik.isValid}>Login</Button> */}

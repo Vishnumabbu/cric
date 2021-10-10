@@ -14,6 +14,9 @@ import AboutPage from './views/AboutPage/AboutPage';
 import Auth from '../hoc/Auth';
 import ProductDetail from './views/ProductDetail/ProductDetail';
 import CartPage from './views/CartPage/CartPage';
+import HistoryPage from './views/HistoryPage/HistoryPage';
+
+import { Row,Col } from 'antd';
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -26,22 +29,35 @@ function App() {
 
     <div className="App">
     
+    <Row>
+      <Col span={24}>
         <NavBar></NavBar>
-
+      </Col>
+    </Row>
+        
+    <Row style={{minHeight:600}}>
+      <Col span={24}>
         <Switch>
 
-          <Route exact path="/" component={Auth(LandingPage,null)}/>
-          <Route exact path="/about" component={Auth(AboutPage,null)}/>
+          <Route exact path="/products" component={Auth(LandingPage,null)}/>
+          <Route exact path="/" component={Auth(AboutPage,null)}/>
           <Route exact path="/login" component={Auth(LoginPage,false)}/>
           <Route exact path="/register" component={Auth(RegisterPage,false)}/>
           <Route exact path="/upload/product" component={Auth(UploadPage,true)}/>
           <Route exact path="/product/:productId" component={Auth(ProductDetail,true)}/>
           <Route exact path="/cart" component={Auth(CartPage,true)}/>
+          <Route exact path="/history" component={Auth(HistoryPage,true)}/>
          
         </Switch>
-        
+      </Col>
+    </Row>
+
+    <Row>
+      <Col span={24}>
         <Footer></Footer>
-    
+      </Col>
+    </Row>
+        
     </div>
   );
 }

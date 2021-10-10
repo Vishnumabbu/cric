@@ -15,7 +15,7 @@ function RightMenu(props) {
   console.log(user);
 
   const logoutHandler = () => {
-    axios.get(`api/users/logout`).then(response => {
+    axios.get(`http://localhost:3000/api/users/logout`).then(response => {
       if (response.status === 200) {
         history.push("/login");
       } else {
@@ -38,10 +38,19 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
-        <Menu.Item key="upload">
-          <a href="/upload/product">Upload</a>
+        <Menu.Item key="products">
+          <a href="/products">Products</a>
         </Menu.Item>
-        <Badge count={1}>
+        <Menu.Item key="history">
+          <a href="/history">History</a>
+        </Menu.Item>
+        {
+          user && user.userData && user.userData.data && user.userData.data.email == "mvreddy.2001@gmail.com" && 
+          <Menu.Item key="upload">
+            <a href="/upload/product">Upload</a>
+          </Menu.Item>
+        }
+        <Badge count={user.userData?.data?.cart.length}>
         <Menu.Item key="cart">
           <a href="/cart"><ShoppingCartOutlined style={{fontSize:"20px"}}/></a>
         </Menu.Item>

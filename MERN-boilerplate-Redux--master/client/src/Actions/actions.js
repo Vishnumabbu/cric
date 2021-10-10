@@ -1,4 +1,4 @@
-import {LOGIN_USER,REGISTER_USER,LOGOUT_USER,AUTH_USER,ADD_TO_CART,GET_CART_DETAILS,REMOVE_CART_ITEM} from './types';
+import {LOGIN_USER,REGISTER_USER,LOGOUT_USER,AUTH_USER,ADD_TO_CART,GET_CART_DETAILS,REMOVE_CART_ITEM,ON_SUCCESS_BUY} from './types';
 import axios from 'axios';
 
 // axios.defaults.withCredentials = true;
@@ -24,7 +24,9 @@ export function registerUser(data){
 }
 
 export function logoutUser(){
-    const res=axios.get('/api/users/logout');
+
+    console.log('logout');
+    const res=axios.get('http://localhost:3000/api/users/logout');
     console.log(res);
 
     return {
@@ -101,3 +103,10 @@ export function removeCartItem(productId){
     }
 
 }
+
+export function onSuccessBuy(data){
+    return{
+        type: ON_SUCCESS_BUY,
+        payload:data
+    }
+} 

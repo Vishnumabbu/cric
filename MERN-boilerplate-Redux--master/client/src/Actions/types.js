@@ -5,3 +5,4 @@ export const AUTH_USER='auth_user';
 export const ADD_TO_CART = 'add_to_cart';
 export const GET_CART_DETAILS='get_cart_details';
 export const REMOVE_CART_ITEM='remove_cart_item';
+export const ON_SUCCESS_BUY='on_success_buy';

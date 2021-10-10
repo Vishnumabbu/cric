@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik , Form , Field ,ErrorMessage  } from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
@@ -17,6 +17,16 @@ function UploadProduct(){
     const update = (data)=>{    
         setImages(data);
     }
+
+    useEffect(()=>{
+
+        // console.log(user.userData?.data?.email)
+        if(user && user.userData && user.userData.data && user.userData.data.email != "mvreddy.2001@gmail.com"){
+            history.push('/');
+            // console.log("Upload  Product")
+        }
+
+    },[user.userData]);
 
     const initialValues={
         title:"",
@@ -47,7 +57,7 @@ function UploadProduct(){
         axios.post('/api/product/uploadProduct',variables).then(res=>{
             if(res.data.success){
                 alert('Product successfully uploaded');
-                history.push('/');
+                history.push('/products');
 
             }
             else{
@@ -57,17 +67,15 @@ function UploadProduct(){
     }
 
     return(
-        <div >
-            <h3 style={{color:"white"}}>UploadProduct Page</h3>
+        <div style={{marginTop:130,marginBottom:30}}>
+            <h3>UploadProduct Page</h3>
 
         <Formik
              initialValues={initialValues}
              validationSchema={validationSchema}
              onSubmit={onSubmit}
         
-        >{
-
-         
+        >{    
 
     (formik)=>{
 
@@ -118,20 +126,13 @@ function UploadProduct(){
 
             </Field>
 
-            <button type="submit" disabled={!formik.isValid}>Submit</button>
+            <button type="submit" style={{backgroundColor:'#FF5733',color:'white',borderRadius:'5px'}} disabled={!formik.isValid}>Submit</button>
 
             </Form>
         )
-
-      
-
-
     }
-
 }
         </Formik>
-
-
         </div>
     )
 

@@ -20,7 +20,7 @@ function FileUpload(props){
         formData.append("file",files[0]);
 
         var fileExt = files[0].name.split('.').pop();
-        console.log(fileExt);
+        // console.log(fileExt);
 
         if(fileExt!='jpg' && fileExt!='png' && fileExt!='jpeg'){
             return (alert('Only jpg and png files are allowed'));

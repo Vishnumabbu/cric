@@ -3,17 +3,23 @@ import { useDispatch , useSelector } from 'react-redux';
 import { getCartDetails } from '../../../Actions/actions';
 import { Button } from 'antd';
 import { useHistory } from 'react-router-dom';
-import { removeCartItem } from '../../../Actions/actions';
+import { removeCartItem,onSuccessBuy } from '../../../Actions/actions';
+import Paypal from '../../utils/Paypal';
+import axios from 'axios';
+import { Result, Empty } from 'antd';
 
 function CartPage(){
 
     const dispatch = useDispatch(); 
     const state = useSelector(state=>state.user);
     const [total, setTotal] = useState(0)
+    const [ShowTotal, setShowTotal] = useState(false)
+    const [ShowSuccess, setShowSuccess] = useState(false)
 
     const history = useHistory();
 
     useEffect(()=>{
+        console.log("cart")
         if(state.userData && state.userData.data.cart){
             // console.log(state.userData)
         dispatch(getCartDetails(state.userData.data.cart)).then(res=>{
@@ -38,7 +44,8 @@ function CartPage(){
         });
 
         setTotal(tot)
-        // setShowTotal(true)
+        if(ShowSuccess == false)
+        setShowTotal(true)
     }
 
     const removeItem = (product)=>{
@@ -58,8 +65,8 @@ function CartPage(){
                     <img style={{ width: '100px' }} alt="product" 
                     src={renderCartImage(product.images[0])} />
                 </td> 
-                <td>{product.quantity} EA</td>
-                <td>Rs {product.price} </td>
+                <td>{product.quantity}</td>
+                <td>$ {product.price} </td>
                 <td> <Button size="large" shape="round" type="danger" onClick={()=>removeItem(product)}
                     >Remove
                     </Button></td>
@@ -68,11 +75,34 @@ function CartPage(){
         ))
     )
 
+    const transactionSuccess = (payment) => {
+        
+        let variables = {
+            cartDetail:state.cartDetails,
+            paymentData:payment,
+        }
+
+        axios.post('/api/users/successBuy',variables).then(res=>{
+            if(res.data.success){
+                setShowSuccess(true);
+                setShowTotal(false);
+                console.log(res.data.cart,1);
+                dispatch(onSuccessBuy({cart:res.data.cart,cartDetail:res.data.cartDetail}))
+                // console.log('came')
+            }
+            else{
+                alert('Failed to buy');
+            }
+        });
+
+
+    }
+
     return (
         // {state.}
         <div style={{display:"flex",justifyContent:'center'}}>
-        <div style={{width: '85%',display:"flex",flexDirection: 'column',justifyContent:'center',marginTop:'100px'}}>
-        <h1>My Cart</h1>
+        <div style={{width: '85%',display:"flex",flexDirection: 'column',justifyContent:'center',marginTop:'160px'}}>
+        { state.userData && state.userData.data && state.userData.data.cart.length ?
             <table >
                 <thead>
                     <tr>
@@ -85,11 +115,38 @@ function CartPage(){
                 <tbody>
                     {renderItems(state.cartDetails)}
                 </tbody>
-            </table>
+            </table>:<p></p>
+        }
 
-            <h2>Total Amount: Rs {total}</h2>
-            {total==0?'':  <Button style={{marginBottom:'30px'}} onClick={()=>{alert('Successfully purchased');history.push('/')}} size="large" shape="round" type="danger">Purchase</Button>}
-          
+            {/* <h2>Total Amount: Rs {total}</h2> */}
+            {state.userData && state.userData.data && state.userData.data.cart.length ?
+                    <div style={{ marginTop: '3rem' }}>
+                        <h2>Total amount: ${total} </h2>
+                    </div>
+                    :
+                    ShowSuccess ?
+                        <Result
+                            status="success"
+                            title="Successfully Purchased Items"
+                        /> :
+                        <div style={{
+                            width: '100%', display: 'flex', flexDirection: 'column',
+                            justifyContent: 'center'
+                        }}>
+                            <br />
+                            <Empty description={false} />
+                            <p>No Items In the Cart</p>
+
+                        </div>
+                }
+            {/* {total==0?'':  <Button style={{marginBottom:'30px'}} onClick={()=>{alert('Successfully purchased');history.push('/')}} size="large" shape="round" type="danger">Purchase</Button>} */}
+            {state.userData && state.userData.data && state.userData.data.cart.length ? <div style={{marginBottom:30}}>
+                <Paypal
+                    toPay={total}
+                    onSuccess={transactionSuccess}
+                />
+            </div>:<p></p>
+            }
         </div>
         </div>
     )

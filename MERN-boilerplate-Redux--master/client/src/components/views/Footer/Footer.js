@@ -11,18 +11,18 @@ function Footer() {
             <div className="footer-center">
               <h2 style={{color:'white'}}>Instagram</h2>
               <div>
-                <a target="_blank " href="https://github.com/ant-design/ant-design">
+                <a target="_blank " href="https://www.instagram.com/bharath_veldi/">
                   Bharath
                 </a>
               </div>
               <div>
-                <a href="http://pro.ant.design">Vishnuvardhan</a>
+                <a target="_blank " href="https://www.instagram.com/vishnuvardhan_1111/">Vishnuvardhan</a>
               </div>
               <div>
-                <a href="http://mobile.ant.design">Sadiq Pasha</a>
+                <a target="_blank " href="https://www.instagram.com/_sadiq_pasha/">Sadiq Pasha</a>
               </div>
               <div>
-                <a target="_blank " href="https://github.com/websemantics/awesome-ant-design">
+                <a target="_blank " href="https://www.instagram.com/____ravi__teja_____/">
                   RaviTeja
                 </a>
               </div>
@@ -30,18 +30,18 @@ function Footer() {
           </Col>
           <Col lg={6} sm={24} xs={24}>
             <div className="footer-center">
-              <h2 style={{color:'white'}}>Twitter</h2>
+              <h2 style={{color:'white'}}>Facebook</h2>
               <div>
-                <a href="http://scaffold.ant.design">Bharath</a>
+                <a target="_blank" href="https://www.facebook.com/veldi.kuchulu">Bharath</a>
               </div>
               <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/dvajs/dva">Vishnuvardhan</a>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/vishnuvardhan.reddy.9461">Vishnuvardhan</a>
               </div>
               <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/dvajs/dva-cli">Sadiq Pasha</a>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sadiqpasha0102">Sadiq Pasha</a>
               </div>
               <div>
-                <a target="_blank" rel="noopener noreferrer" href="http://motion.ant.design">RaviTeja</a>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/raviteja.madipadiga">RaviTeja</a>
               </div>
             </div>
           </Col>

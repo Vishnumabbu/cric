@@ -7,6 +7,9 @@ const auth = require('../middleware/auth');
 var ObjectId = require('mongodb').ObjectID;
 
 const Product = require('../models/Product');
+const Payment = require('../models/Payment');
+
+const async = require('async');
 
 const router=express.Router();
 router.use(cookieParser());
@@ -16,6 +19,7 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/auth',auth,(req,res)=>{
+    // console.log('came');
     res.status(200).json({
         "_id":req.user._id,
         "isAdmin": req.user.role === 0 ? false : true,
@@ -45,6 +49,8 @@ router.post('/register',async(req,res)=>{
 
 router.post('/login',(req,res)=>{
 
+    // console.log('hello')
+
     User.findOne({email:req.body.email},(err,user)=>{
         if(!user){
             return res.json({
@@ -52,15 +58,16 @@ router.post('/login',(req,res)=>{
                 message:'Email not found'
             })
         }
+        // console.log("came");
 
         user.comparePassword(req.body.password,(err,isMatch)=>{
-            if(err){
+            if(err || !isMatch){
                 return res.json({
                     loginSuccess:false,
                     message:'wrong password'
                 })
             }
-
+            console.log("came");
             user.generateToken((err,user)=>{
                 if(err){
                     return res.json({
@@ -68,6 +75,7 @@ router.post('/login',(req,res)=>{
                         message:'Auth failed'
                     })
                 }
+                // console.log(user.token)
                 res.cookie("x_authExp", user.tokenExp);
                 return res.cookie('x_auth', user.token)
                 .status(200)
@@ -77,10 +85,11 @@ router.post('/login',(req,res)=>{
                     name:user.name
                 })
             })
-
+            console.log('skipped');
         })
 
     })
+    // res.json('fail');
 
 });
 
@@ -182,5 +191,97 @@ router.post('/removeCartItem',auth,(req,res)=>{
 
 })
 
+
+router.post('/successBuy',auth,(req,res)=>{
+
+    let history = [];
+    let transactionData = {};
+
+    //1.Put brief Payment Information inside User Collection 
+    req.body.cartDetail.forEach((item) => {
+        history.push({
+            dateOfPurchase: Date.now(),
+            name: item.title,
+            id: item._id,
+            price: item.price,
+            quantity: item.quantity,
+            paymentId: req.body.paymentData.paymentID
+        })
+    })
+
+    //2.Put Payment Information that come from Paypal into Payment Collection 
+    transactionData.user = {
+        id: req.user._id,
+        name: req.user.name,
+        email: req.user.email
+    }
+
+    transactionData.data = req.body.paymentData;
+    transactionData.product = history
+
+    User.findOneAndUpdate(
+        { _id: req.user._id },
+        { $push: { history: history }, $set: { cart: [] } },
+        { new: true },
+        (err, user) => {
+            if (err) return res.json({ success: false, err });
+
+            const payment = new Payment(transactionData)
+            payment.save((err, doc) => {
+                if (err) return res.json({ success: false, err });
+
+                //3. Increase the amount of number for the sold information 
+
+                //first We need to know how many product were sold in this transaction for 
+                // each of products
+
+                let products = [];
+                doc.product.forEach(item => {
+                    products.push({ id: item.id, quantity: item.quantity })
+                })
+
+                // first Item    quantity 2
+                // second Item  quantity 3
+                console.log("came00");
+
+                async.eachSeries(products, (item, callback) => {
+                    Product.updateOne(
+                        { _id: item.id },
+                        {
+                            $inc: {
+                                "sold": item.quantity
+                            }
+                        },
+                        { new: false },
+                        callback
+                    )
+                }, (err) => {
+                    if (err) return res.json({ success: false, err })
+                    res.status(200).json({
+                        success: true,
+                        cart: [],
+                        cartDetail: []
+                    })
+                })
+
+            })
+        }
+    )
+})
+
+router.get('/getHistory',auth,(req,res)=>{
+    User.findOne({_id:req.user._id},(err,docs)=>{
+        if(err){
+            return res.json({
+                success:false,
+                err
+            })
+        }
+        return res.json({
+            success:true,
+            history:docs.history
+        })
+    })
+})
 
 module.exports=router;

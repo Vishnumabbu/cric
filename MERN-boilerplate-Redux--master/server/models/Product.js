@@ -26,7 +26,7 @@ const ProductSchema = mongoose.Schema({
     types:{
         type: String
     },
-    stock:{
+    sold:{
         type:Number,
         maxlength:100,
         default:0
@@ -40,9 +40,6 @@ const ProductSchema = mongoose.Schema({
 ProductSchema.index({ 
     title:'text',
 });
-
-    
-
 
 const Product = mongoose.model('Products',ProductSchema);
 

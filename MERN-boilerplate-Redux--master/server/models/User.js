@@ -24,6 +24,10 @@ const userSchema = mongoose.Schema({
         type:Array,
         default:[]
     },
+    history: {
+        type: Array,
+        default: []
+    },
     token:{
         type:String,
     },
@@ -58,26 +62,36 @@ userSchema.pre('save',async function(next){
 });
 
 userSchema.methods.comparePassword=function(plainPassword,callback){
+    // console.log(plainPassword)
     bcrypt.compare(plainPassword,this.password,function(err,isMatch){
         if(err)return callback(err);
+        console.log(isMatch)
         return callback(null,isMatch);
     })
 }
 
-userSchema.methods.generateToken=function(callback){
+userSchema.methods.generateToken=async function(callback){
     const user = this;
 
     var token = jwt.sign(user._id.toHexString(),'secret');
     var oneHour = moment().add(1, 'hour').valueOf();
 
-    user.tokenExp = oneHour;
 
-    user.token = token;
+    // user.save((err,user)=>{
+    //     if(err)callback(err);
+    //     else callback(null,user);
+    // })
 
-    user.save((err,user)=>{
+    await User.findOneAndUpdate({email:user.email},{$set:{token:token,tokenExp:oneHour}},(err,docs)=>{
         if(err)callback(err);
-        else callback(null,user);
-    })
+        
+        else {
+            user.tokenExp = oneHour;
+            user.token = token;
+            callback(null,user);
+        }
+    });
+
 }
 
 userSchema.statics.findIdByToken=function(token,callback){
