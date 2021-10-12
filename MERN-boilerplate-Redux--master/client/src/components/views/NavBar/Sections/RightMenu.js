@@ -46,6 +46,12 @@ function RightMenu(props) {
         </Menu.Item>
         {
           user && user.userData && user.userData.data && user.userData.data.email == "mvreddy.2001@gmail.com" && 
+          <Menu.Item key="orders">
+            <a href="/orders">Orders</a>
+          </Menu.Item>
+        }
+        {
+          user && user.userData && user.userData.data && user.userData.data.email == "mvreddy.2001@gmail.com" && 
           <Menu.Item key="upload">
             <a href="/upload/product">Upload</a>
           </Menu.Item>

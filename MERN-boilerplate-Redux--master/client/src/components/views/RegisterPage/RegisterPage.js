@@ -48,7 +48,7 @@ function RegisterPage(props) {
   };
 
   return (
-    <div style={{ width: '75%', margin: '0rem auto',marginTop:"160px",marginBottom:30}}>
+    <div className="bg1" style={{ width: '100%', margin: '0rem auto',marginTop:"100px"}}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -57,7 +57,7 @@ function RegisterPage(props) {
         {(formik) => {
           return (
             <Form className="container">
-              <h3>Register</h3>
+              <h2 style={{color:'white'}}>Register</h2>
 
               <div className="form-control row">
                 <label style={{ color: "white" }} htmlFor="name">
@@ -105,7 +105,7 @@ function RegisterPage(props) {
               </div>
 
               <div className="form-control row">
-                <button style={{marginTop:'20px',marginTop:'20px',backgroundColor:'#FF5733',color:'white',borderRadius:'5px'}} type="submit" disabled={!formik.isValid}>
+                <button style={{width:'165px',marginTop:'20px',marginTop:'20px',backgroundColor:'#FF5733',color:'white'}} type="submit" disabled={!formik.isValid}>
                   Register
                 </button>
                 {/* <Button>Primary</Button> */}

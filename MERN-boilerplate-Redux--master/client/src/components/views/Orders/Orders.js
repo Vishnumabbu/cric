@@ -1,0 +1,122 @@
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Row,Col,Card,Modal,Button } from 'antd';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+
+const { Meta } =  Card;
+
+const Orders = () => {
+
+    const user = useSelector(state=>state.user);
+    const history = useHistory();
+
+    const [orders,setOrders] = useState([]);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [ord,setOrder] = useState({product:[]});
+
+    const getOrders = ()=>{
+        axios.get('http://localhost:3000/api/users/getOrders').then(res=>{
+            if(res.data.success){
+                setOrders(res.data.orders)
+                console.log(orders,1);
+            }
+            else{
+                alert('Failed to fetch orders');
+            }
+        })
+    }
+
+    useEffect(()=>{
+
+        // console.log(user.userData?.data?.email)
+        if(user && user.userData && user.userData.data && user.userData.data.email != "mvreddy.2001@gmail.com"){
+            history.push('/');
+            // console.log("Upload  Product")
+        }
+
+    },[user.userData]);
+
+    const showModal = (order) => {
+        setOrder(order);
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+        setOrder({product:[]});
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+        setOrder({product:[]});
+    };
+
+    const deleteOrder = (order) => {
+        axios.post('http://localhost:3000/api/users/deleteOrder',{_id:order._id}).then(res=>{
+            if(res.data.success){
+                alert('Successfully delivered')
+                getOrders();
+            }
+            else{
+                alert('Failed to delete the order');
+            }
+        })
+    }
+
+    const renderOrders =
+        // console.log('HHHH');
+        orders.map(order=>{
+                return <Col lg={6} md={8} xs={24}>
+                <Card
+                    hoverable={true}
+                    // cover={<a href={`/product/${p._id}`} ><ImageSlider images={p.images} /></a> }
+                >
+                    <Meta
+                        title={order.user[0].name}
+                        description={order.data[0].address.line1+','+order.data[0].address.city}
+                        style={{marginBottom:'30px'}}
+                    />
+
+                    <Button style={{marginRight:'2px'}} type="primary" onClick={()=>showModal(order)}>
+                        View Products
+                    </Button>
+                    <Modal title="Products" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                        {
+                            ord?.product.map(prod=>{
+                                return(
+                                <div>
+                                    <div>{prod.name} - ${prod.price}</div>
+                                    {/* <div>$ {prod.price}</div> */}
+                                </div>
+                                )
+                            })
+                        }
+                    </Modal>
+
+                    <Button type="danger" onClick={()=>deleteOrder(order)}>
+                        Delivered
+                    </Button>
+            
+                </Card>
+            </Col>
+            });
+
+    useEffect(()=>{
+
+        getOrders();
+
+    },[]);
+
+    return(
+        <div style={{marginTop:'130px'}}>
+            <h2>Orders Page</h2>
+            <Row style={{marginTop:"70px"}} gutter={[16, 16]}>
+                        {renderOrders}
+            </Row>
+        </div>
+    )
+
+}
+
+export default Orders;

@@ -20,3 +20,18 @@
      transition: all 0.2s;
 
 } */
+
+.bg1{
+    background-image: url('https://source.unsplash.com/7ACuHoezUYk/1920x940');
+    /* background-size:contain; */
+    /* background-repeat: no-repeat; */
+     /* width: 100px; */
+    height: 700px;
+    /* background: url(images/bg.jpg) no-repeat center center fixed;  */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover; 
+   background-size: cover;
+   background-position: center;
+   object-fit: cover;
+}

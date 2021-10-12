@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import FileUpload from '../../utils/FileUpload';
 import axios from 'axios';
+import './UploadProduct.css';
 
 function UploadProduct(){
 
@@ -67,7 +68,7 @@ function UploadProduct(){
     }
 
     return(
-        <div style={{marginTop:130,marginBottom:30}}>
+        <div className="bg2" style={{marginTop:110}}>
             <h3>UploadProduct Page</h3>
 
         <Formik
@@ -86,8 +87,8 @@ function UploadProduct(){
                 <FileUpload update={update}></FileUpload>
 
             <div className='form-control row'>
-                <label htmlFor='title'>Title</label><br/>
-                <Field type='text' id='title' name='title' >
+                <label htmlFor='title'></label><br/>
+                <Field placeholder ='title' type='text' id='title' name='title' >
 
                 </Field>
                 <ErrorMessage name='title'>
@@ -97,8 +98,8 @@ function UploadProduct(){
             </div>
 
             <div className='form-control row'>
-                <label  htmlFor='description'>Description</label><br/>
-                <Field as="textarea" id='description' name='description' >
+                <label  htmlFor='description'></label><br/>
+                <Field cols='22' placeholder ='description' as="textarea" id='description' name='description' >
 
                 </Field>
                 <ErrorMessage name='description'>
@@ -108,7 +109,7 @@ function UploadProduct(){
             </div>
 
             <div className='form-control row'>
-                <label htmlFor='description'>Price</label><br/>
+                <label style={{color:'white'}} htmlFor='description'>Price</label><br/>
                 <Field type="Number" id='price' name='price' >
 
                 </Field>

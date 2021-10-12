@@ -54,17 +54,17 @@ function Footer() {
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/ant-design/ant-design/wiki/FAQ">
+                <a rel="noopener noreferrer" href="/changelog">
                   Careers
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://gitter.im/ant-design/ant-design">
+                <a rel="noopener noreferrer" href="/changelog">
                   Releases
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://gitter.im/ant-design/ant-design-english">
+                <a rel="noopener noreferrer" href="/changelog">
                   Gifts
                 </a>
               </div>
@@ -77,7 +77,7 @@ function Footer() {
                 Help
               </h2>
               <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://eggjs.org/">Help</a>
+                <a rel="noopener noreferrer"href="/changelog">Help</a>
 
               </div>
             </div>

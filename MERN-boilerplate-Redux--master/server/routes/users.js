@@ -284,4 +284,34 @@ router.get('/getHistory',auth,(req,res)=>{
     })
 })
 
+
+router.get('/getOrders',auth,(req,res)=>{
+    Payment.find({},(err,docs)=>{
+        if(err){
+            return res.json({
+                success:false,
+                err
+            })
+        }
+        return res.json({
+            success:true,
+            orders:docs
+        })
+    })
+})
+
+router.post('/deleteOrder',auth,(req,res)=>{
+    Payment.findByIdAndRemove({_id:req.body._id},(err,docs)=>{
+        if(err){
+            return res.json({
+                success:false,
+                err
+            })
+        }
+        return res.json({
+            success:true,
+        })
+    })
+})
+
 module.exports=router;

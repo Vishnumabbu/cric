@@ -60,20 +60,20 @@ function FileUpload(props){
             >
                 {({ getRootProps, getInputProps }) => (
                     <div style={{
-                        width: '300px', height: '240px', border: '1px solid gray',
+                        width: '300px', height: '240px', border: '1px solid white',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',margin:"auto"
                     }}
                         {...getRootProps()}
                     >
                         <input {...getInputProps()} />
-                        <PlusOutlined ></PlusOutlined>
+                        <PlusOutlined style={{color:'white'}}></PlusOutlined>
 
                     </div>
                 )}
             </Dropzone>
 
 
-            <div style={{ display: 'flex', width: '350px', height: '240px', overflowX: 'scroll',margin:"auto"}}>
+            <div style={{ display: 'flex', width: '350px',border:'1px solid white', height: '240px', overflowX: 'scroll',margin:"auto"}}>
 
                 {Images.map((image, index) => (
                     <div onClick={()=>onDelete(image)}>

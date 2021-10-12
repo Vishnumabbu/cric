@@ -17,6 +17,8 @@ import CartPage from './views/CartPage/CartPage';
 import HistoryPage from './views/HistoryPage/HistoryPage';
 
 import { Row,Col } from 'antd';
+import Nothing from './views/Nothing/Nothing';
+import Orders from './views/Orders/Orders';
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -47,6 +49,8 @@ function App() {
           <Route exact path="/product/:productId" component={Auth(ProductDetail,true)}/>
           <Route exact path="/cart" component={Auth(CartPage,true)}/>
           <Route exact path="/history" component={Auth(HistoryPage,true)}/>
+          <Route exact path="/orders" component={Auth(Orders,true)}/>
+          <Route exact path="*" component={Auth(Nothing,null)}/>
          
         </Switch>
       </Col>
