@@ -50,7 +50,6 @@ const HisoryPage = () => {
                             </tr>
                         ))}
 
-
                 </tbody>
             </table>
         </div>

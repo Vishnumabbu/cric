@@ -67,7 +67,7 @@ router.post('/login',(req,res)=>{
                     message:'wrong password'
                 })
             }
-            console.log("came");
+            // console.log("came");
             user.generateToken((err,user)=>{
                 if(err){
                     return res.json({
@@ -85,7 +85,7 @@ router.post('/login',(req,res)=>{
                     name:user.name
                 })
             })
-            console.log('skipped');
+            // console.log('skipped');
         })
 
     })
@@ -120,7 +120,7 @@ router.post('/addToCart',auth,(req,res)=>{
             if(item.id.toString()==productId.toString())duplicate=true;
         })
 
-     console.log(duplicate)
+    //  console.log(duplicate)
 
     if(duplicate===true){
         console.log('duplicate');
@@ -175,7 +175,7 @@ router.post('/removeCartItem',auth,(req,res)=>{
     }, { new: true },(err,userInfo)=>{
         
         let cart = userInfo.cart;
-        console.log(cart)
+        // console.log(cart)
         let array = cart.map(item => {
             return item.id
         })
@@ -242,7 +242,7 @@ router.post('/successBuy',auth,(req,res)=>{
 
                 // first Item    quantity 2
                 // second Item  quantity 3
-                console.log("came00");
+                // console.log("came00");
 
                 async.eachSeries(products, (item, callback) => {
                     Product.updateOne(

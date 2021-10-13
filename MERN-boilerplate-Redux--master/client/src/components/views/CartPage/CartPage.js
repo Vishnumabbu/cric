@@ -121,7 +121,7 @@ function CartPage(){
             {/* <h2>Total Amount: Rs {total}</h2> */}
             {state.userData && state.userData.data && state.userData.data.cart.length ?
                     <div style={{ marginTop: '3rem' }}>
-                        <h2>Total amount: ${total} </h2>
+                        <h3>Total amount: ${total} </h3>
                     </div>
                     :
                     ShowSuccess ?

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Row,Col,Card,Modal,Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { Empty } from 'antd';
 
 const { Meta } =  Card;
 
@@ -86,7 +87,7 @@ const Orders = () => {
                             ord?.product.map(prod=>{
                                 return(
                                 <div>
-                                    <div>{prod.name} - ${prod.price}</div>
+                                    <div>{prod.name} - {prod.quantity} * ${prod.price}</div>
                                     {/* <div>$ {prod.price}</div> */}
                                 </div>
                                 )
@@ -95,7 +96,7 @@ const Orders = () => {
                     </Modal>
 
                     <Button type="danger" onClick={()=>deleteOrder(order)}>
-                        Delivered
+                        Delivered/Done
                     </Button>
             
                 </Card>
@@ -110,10 +111,13 @@ const Orders = () => {
 
     return(
         <div style={{marginTop:'130px'}}>
-            <h2>Orders Page</h2>
-            <Row style={{marginTop:"70px"}} gutter={[16, 16]}>
-                        {renderOrders}
-            </Row>
+            {
+                orders.length ? (<div><h2>Orders Page</h2>
+                <Row style={{marginTop:"70px"}} gutter={[16, 16]}>
+                            {renderOrders}
+                </Row></div>) : <Empty/>
+            }
+           
         </div>
     )
 
