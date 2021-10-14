@@ -3,8 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { Row,Col,Card,Modal,Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { Empty } from 'antd';
+import { Empty,notification } from 'antd';
 import { PoweroffOutlined } from '@ant-design/icons';
+
+const openNotification = () => {
+  notification.open({
+    message: 'Notification',
+    description:
+      'Successfully Delivered.',
+    onClick: () => {
+      console.log('Notification Clicked!');
+    },
+  });
+};
 
 const { Meta } =  Card;
 
@@ -38,6 +49,7 @@ const Orders = () => {
             history.push('/');
             // console.log("Upload  Product")
         }
+        // openNotification();
 
     },[user.userData]);
 
@@ -59,7 +71,8 @@ const Orders = () => {
     const deleteOrder = (order) => {
         axios.post('http://localhost:3000/api/users/deleteOrder',{_id:order._id}).then(res=>{
             if(res.data.success){
-                alert('Successfully delivered')
+                // alert('Successfully delivered')
+                openNotification();
                 getOrders();
             }
             else{

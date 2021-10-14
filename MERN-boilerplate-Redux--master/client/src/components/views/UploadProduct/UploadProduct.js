@@ -7,6 +7,19 @@ import { useHistory } from 'react-router-dom';
 import FileUpload from '../../utils/FileUpload';
 import axios from 'axios';
 import './UploadProduct.css';
+import { Empty,notification } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
+
+const openNotification = () => {
+  notification.open({
+    message: 'Notification',
+    description:
+      'Successfully Uploaded.',
+    onClick: () => {
+      console.log('Successfully uploaded!');
+    },
+  });
+};
 
 function UploadProduct(){
 
@@ -57,7 +70,8 @@ function UploadProduct(){
 
         axios.post('/api/product/uploadProduct',variables).then(res=>{
             if(res.data.success){
-                alert('Product successfully uploaded');
+                // alert('Product successfully uploaded');
+                openNotification();
                 history.push('/products');
 
             }
