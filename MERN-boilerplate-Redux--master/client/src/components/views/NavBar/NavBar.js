@@ -5,6 +5,7 @@ import { Drawer, Button ,Icon} from 'antd';
 import './Sections/Navbar.css';
 import { DoubleLeftOutlined } from '@ant-design/icons';
 import { DropboxOutlined ,FireTwoTone} from '@ant-design/icons';
+import { getTwoToneColor, setTwoToneColor } from '@ant-design/icons';
 
 function NavBar() {
   const [visible, setVisible] = useState(false)
@@ -17,10 +18,12 @@ function NavBar() {
     setVisible(false)
   };
 
+  setTwoToneColor('#00bfff');
+
   return (
     <nav className="menu" style={{ position: 'fixed', zIndex: 5, width: '100%' }}>
       <div className="menu__logo">
-        <a href="/"> <FireTwoTone style={{fontSize:'40px'}}></FireTwoTone >ECSPORTS</a>
+        <a href="/"> <FireTwoTone style={{fontSize:'40px'}}></FireTwoTone><span style={{color:'#00bfff'}}>ECSPORTS</span></a>
       </div>
       <div className="menu__container">
         <div className="menu_left">

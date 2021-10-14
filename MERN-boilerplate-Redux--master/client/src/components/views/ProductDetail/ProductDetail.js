@@ -112,7 +112,7 @@ function ProductDetail(props){
                 Products.length===0?<div></div>:
                 (
                     <div style={{marginTop:'30px',width:'75%'}} >
-                    <h2>Similar Products</h2>
+                    <h2>Products related to this item</h2>
 
                     <Row style={{marginTop:"70px"}} gutter={[16, 16]}>
                         {renderCards}
