@@ -20,7 +20,7 @@ app.use('/api/product',require('./routes/product'));
 app.use('/uploads', express.static('../uploads'));
 
 
-mongoose.connect('mongodb://localhost:27017/cricket',{useNewUrlParser: true, useUnifiedTopology: true } ,(err)=>{
+mongoose.connect('mongodb+srv://vishnuvardhan:vishnureddy@cluster0.bj1hx.mongodb.net/cric?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true } ,(err)=>{
     if(err)console.log(JSON.stringify(err));
     else console.log('DB connected successfully');
 });
