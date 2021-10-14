@@ -8,7 +8,7 @@ import Paypal from '../../utils/Paypal';
 import axios from 'axios';
 import { Result, Empty } from 'antd';
 import { addToCart } from '../../../Actions/actions';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined,PoweroffOutlined } from '@ant-design/icons';
 
 function CartPage(){
 
@@ -17,6 +17,7 @@ function CartPage(){
     const [total, setTotal] = useState(0)
     const [ShowTotal, setShowTotal] = useState(false)
     const [ShowSuccess, setShowSuccess] = useState(false)
+    const [loading,setLoading] = useState(true);
 
     const history = useHistory();
 
@@ -27,6 +28,7 @@ function CartPage(){
         dispatch(getCartDetails(state.userData.data.cart)).then(res=>{
             // console.log(res.payload);
             calculateTotal(res.payload)
+            setLoading(false);
         });
     }
     },[state.userData]);
@@ -115,8 +117,9 @@ function CartPage(){
 
     return (
         // {state.}
-        <div style={{display:"flex",justifyContent:'center'}}>
-        <div style={{width: '85%',display:"flex",flexDirection: 'column',justifyContent:'center',marginTop:'160px'}}>
+        <div style={{display:"flex",justifyContent:'center',marginTop:'160px'}}>
+            {loading?<Button type="primary" icon={<PoweroffOutlined />} loading />:
+        <div style={{width: '85%',display:"flex",flexDirection: 'column',justifyContent:'center',marginTop:'10px'}}>
         { state.userData && state.userData.data && state.userData.data.cart.length ?
             <table >
                 <thead>
@@ -164,6 +167,7 @@ function CartPage(){
             </div>:<p></p>
             }
         </div>
+    }
         </div>
     )
 

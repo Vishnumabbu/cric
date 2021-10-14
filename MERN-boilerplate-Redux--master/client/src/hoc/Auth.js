@@ -18,7 +18,7 @@ export default function (SpecificComponent,option,adminRoute=null){
 
             dispatch(auth()).then(res=>{
 
-                console.log('Auth.js dispatch')
+                // console.log('Auth.js dispatch')
 
                 if(!res.payload.data.isAuth){
                     if(option){

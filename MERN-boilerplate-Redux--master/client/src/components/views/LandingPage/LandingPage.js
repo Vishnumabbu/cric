@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './LandingPage.css';
 import axios from 'axios';
-import { Row,Col,Card,Checkbox,Radio,Input } from 'antd';
+import { Row,Col,Card,Checkbox,Input,Button } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
 
 import ImageSlider from '../../utils/ImageSlider';
 
@@ -16,6 +17,7 @@ function LandingPage(){
     const [sort,setSort] = useState(false);
     const [filter,setFilter] = useState([1,2,3,4]);
     const [search,setSearch] = useState("");
+    const [loading,setLoading] = useState(true);
 
     const sortChange = ()=>{
 
@@ -44,6 +46,7 @@ function LandingPage(){
                 setStart([...Products,...res.data.products]);
                 // start=res.data.products;
                 // console.log(start)
+                setLoading(false);
             }
             else{
                 alert('Failed to load Products');
@@ -118,7 +121,7 @@ function LandingPage(){
     return (
     
         <div  style={{ width: '75%', margin: '0rem auto',marginTop:"160px",marginBottom:30 }}>
-
+            {loading?<Button type="primary" icon={<PoweroffOutlined />} loading />:(<div>
             <div style={{ textAlign: 'center'}}>
                 <h2>    Products  </h2>
             </div>
@@ -159,8 +162,8 @@ function LandingPage(){
                 </div>
 
            }
-          
-            
+          </div>)
+        }
         </div>
     )
 }

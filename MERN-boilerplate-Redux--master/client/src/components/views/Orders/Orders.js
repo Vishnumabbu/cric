@@ -4,6 +4,7 @@ import { Row,Col,Card,Modal,Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Empty } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
 
 const { Meta } =  Card;
 
@@ -15,11 +16,13 @@ const Orders = () => {
     const [orders,setOrders] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [ord,setOrder] = useState({product:[]});
+    const [loading,setLoading] = useState(true);
 
     const getOrders = ()=>{
         axios.get('http://localhost:3000/api/users/getOrders').then(res=>{
             if(res.data.success){
                 setOrders(res.data.orders)
+                setLoading(false);
                 console.log(orders,1);
             }
             else{
@@ -112,11 +115,13 @@ const Orders = () => {
     return(
         <div style={{marginTop:'130px'}}>
             {
+                loading?<Button type="primary" icon={<PoweroffOutlined />} loading />:
                 orders.length ? (<div><h2>Orders Page</h2>
                 <Row style={{marginTop:"70px"}} gutter={[16, 16]}>
                             {renderOrders}
                 </Row></div>) : <Empty/>
             }
+            
            
         </div>
     )

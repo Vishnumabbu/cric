@@ -1,28 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useSelector} from 'react-redux';
+import { PoweroffOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 // import './HistoryPage.css';
 
 const HisoryPage = () => {
 
     const [History,setHistory] = useState([]);
+    const [loading,setLoading] = useState(true);
 
     useEffect(()=>{
-        axios.get('http://localhost:5000/users/getHistory').then(res=>{
+        axios.get('http://localhost:3000/api/users/getHistory').then(res=>{
             if(res.data.success){
                 setHistory(res.data.history);
+                setLoading(false);
             }
             else{
                 alert('Failed to fetch history');
             }
         })
-    })
+    },[]);
 
     const user = useSelector(state=>state.user);
 
     return(
         <div style={{ width: '80%',margin: '0rem auto', marginTop: '160px',marginBottom:'30px' }}>
+            {
+                loading?<Button type="primary" icon={<PoweroffOutlined />} loading />:(<div>
             <div style={{ textAlign: 'center' }}>
                 <h1>History</h1>
             </div>
@@ -52,6 +58,8 @@ const HisoryPage = () => {
 
                 </tbody>
             </table>
+            </div>)
+    }
         </div>
     )
 
