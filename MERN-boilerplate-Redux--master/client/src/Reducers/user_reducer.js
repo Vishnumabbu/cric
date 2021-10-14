@@ -18,7 +18,13 @@ export default function(state={},action){
             return {...state};
         
         case ADD_TO_CART:
-            return  {...state,cartInfo:action.payload}
+            return  {...state,userData:{
+                ...state.userData,
+                data:{
+                    ...state.userData.data,
+                    cart:action.payload.data.cart
+                }
+            },cartInfo:action.payload}
 
         case GET_CART_DETAILS:
             return {...state,cartDetails:action.payload}

@@ -7,6 +7,8 @@ import { removeCartItem,onSuccessBuy } from '../../../Actions/actions';
 import Paypal from '../../utils/Paypal';
 import axios from 'axios';
 import { Result, Empty } from 'antd';
+import { addToCart } from '../../../Actions/actions';
+import { PlusOutlined } from '@ant-design/icons';
 
 function CartPage(){
 
@@ -58,6 +60,16 @@ function CartPage(){
     
     }
 
+    const addToCartHandler = (product)=>{
+        console.log('Cart');
+
+        dispatch(addToCart(product._id)).then(res=>{
+            console.log(res.payload.data.success);
+            // history.push('/cart');
+        }
+        );
+    }
+
     const renderItems = (products) => (
       products && products.map(product => (
             <tr key={product._id}>
@@ -67,6 +79,9 @@ function CartPage(){
                 </td> 
                 <td>{product.quantity}</td>
                 <td>$ {product.price} </td>
+                <td> <Button size="large" shape="round" type="danger" onClick={()=>addToCartHandler(product)}
+                    ><PlusOutlined />
+                    </Button></td>
                 <td> <Button size="large" shape="round" type="danger" onClick={()=>removeItem(product)}
                     >Remove
                     </Button></td>
@@ -109,6 +124,7 @@ function CartPage(){
                         <th>Product Image</th>
                         <th>Product Quantity</th>
                         <th>Product Price</th>
+                        <th>Add Quantity</th>
                         <th>Remove from Cart</th>
                     </tr>
                 </thead>
