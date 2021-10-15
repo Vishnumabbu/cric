@@ -8,6 +8,19 @@ import { useHistory } from "react-router-dom";
 import "./RegisterPage.css";
 
 import { registerUser } from "../../../Actions/actions";
+import { Empty,notification } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
+
+const openNotification = () => {
+  notification.open({
+    message: 'Notification',
+    description:
+      'Registered successfully.',
+    onClick: () => {
+      console.log('Successfully uploaded!');
+    },
+  });
+};
 
 function RegisterPage(props) {
   let history = useHistory();
@@ -36,7 +49,8 @@ function RegisterPage(props) {
       .then((res) => {
         console.log(res);
         if (res.payload.data.registerSuccess === true) {
-          console.log(res);
+          // console.log(res);
+          openNotification();
           history.push("/");
         } else {
           alert("user with this mail id is already registered");

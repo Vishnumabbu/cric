@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './LandingPage.css';
 import axios from 'axios';
 import { Row,Col,Card,Checkbox,Input,Button } from 'antd';
@@ -19,13 +19,16 @@ function LandingPage(){
     const [search,setSearch] = useState("");
     const [loading,setLoading] = useState(true);
 
+    const help = useRef([]);
+
     const sortChange = ()=>{
 
          setSort(!sort);
 
          // to escape async js I need to do the opposite
         if(sort==true){
-            setProducts([...Products]);
+            setProducts([...help.current]);
+            setFilter([1,2,3,4]);
             return;
         }
 
@@ -47,6 +50,7 @@ function LandingPage(){
                 // start=res.data.products;
                 // console.log(start)
                 setLoading(false);
+                help.current = res.data.products;
             }
             else{
                 alert('Failed to load Products');

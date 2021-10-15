@@ -6,6 +6,19 @@ import { useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Badge } from 'antd';
+import { Empty,notification } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
+
+const openNotification = () => {
+  notification.open({
+    message: 'Notification',
+    description:
+      'Logged Out.',
+    onClick: () => {
+      console.log('Successfully uploaded!');
+    },
+  });
+};
 
 
 function RightMenu(props) {
@@ -17,6 +30,7 @@ function RightMenu(props) {
   const logoutHandler = () => {
     axios.get(`http://localhost:3000/api/users/logout`).then(response => {
       if (response.status === 200) {
+        openNotification();
         history.push("/login");
       } else {
         alert('Log Out Failed')

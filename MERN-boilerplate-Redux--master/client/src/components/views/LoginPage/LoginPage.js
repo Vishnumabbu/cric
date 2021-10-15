@@ -8,6 +8,19 @@ import { useHistory } from "react-router-dom";
 import "./LoginPage.css";
 import { loginUser, logoutUser } from "../../../Actions/actions";
 import { Button } from 'antd';
+import { Empty,notification } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
+
+const openNotification = () => {
+  notification.open({
+    message: 'Notification',
+    description:
+      'Logged In.',
+    onClick: () => {
+      console.log('Successfully uploaded!');
+    },
+  });
+};
 
 function LoginPage(props) {
   const store = useSelector((state) => state);
@@ -37,7 +50,8 @@ function LoginPage(props) {
     dispatch(loginUser(values)).then((res) => {
       if (res.payload.data.loginSuccess === true) {
         // console.log(res);
-        console.log('LoginPage 40')
+        // console.log('LoginPage 40')
+        openNotification();
         history.push("/");
       } else {
         alert("Check your email or password again");
