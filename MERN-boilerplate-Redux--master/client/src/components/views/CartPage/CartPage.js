@@ -36,7 +36,7 @@ function CartPage(){
     const renderCartImage = (images) => {
         if(images.length > 0) {
             let image = images[0]
-            return `http://192.168.1.6:5000/${image}`
+            return `http://localhost:5000/${image}`
         }
     }
 

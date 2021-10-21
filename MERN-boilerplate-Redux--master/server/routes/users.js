@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 
 const User = require('../models/User');
 const auth = require('../middleware/auth');
+const nodemailer = require('nodemailer');
 
 var ObjectId = require('mongodb').ObjectID;
 
@@ -191,6 +192,37 @@ router.post('/removeCartItem',auth,(req,res)=>{
 
 })
 
+async function main(req) {
+    // Generate test SMTP service account from ethereal.email
+    // Only needed if you don't have a real mail account for testing
+    // let testAccount = await nodemailer.createTestAccount();
+  
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      service:'gmail',
+    //   secure: false, // true for 465, false for other ports
+      auth: {
+        user: 'ecsports123@gmail.com', // generated ethereal user
+        pass: 'abdabdabd', // generated ethereal password
+      },
+    });
+  
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from:'"Ecsports" <ecsports123@gmail.com>', // sender address
+      to: `${req.user.email},ecsports123@gmail.com`, // list of receivers
+      subject: "New Order Placed", // Subject line
+      text: `From ${req.user.email}`, // plain text body
+      html: "<b>Placed a New Order ,Check the Website</b>", // html body
+    });
+  
+    console.log("Message sent: %s", info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  
+    // Preview only available when sending through an Ethereal account
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  }
 
 router.post('/successBuy',auth,(req,res)=>{
 
@@ -218,6 +250,8 @@ router.post('/successBuy',auth,(req,res)=>{
 
     transactionData.data = req.body.paymentData;
     transactionData.product = history
+
+    main(req).catch(err=>console.log(err))
 
     User.findOneAndUpdate(
         { _id: req.user._id },

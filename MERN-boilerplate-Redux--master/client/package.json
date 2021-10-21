@@ -34,7 +34,7 @@
     "frontend": "npm run start",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\""
   },
-  "proxy": "http://192.168.1.6:5000",
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": "react-app"
   },
