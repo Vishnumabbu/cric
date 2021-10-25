@@ -11,7 +11,7 @@ function ImageSlider(props){
                     <div key={index}>
                         <img style={{ width: '100%', maxHeight: '150px' }}
                           
-                            src={`http://192.168.1.6:5000/${image}`} alt="productImage" />
+                            src={`http://localhost:5000/${image}`} alt="productImage" />
                     </div>
                 ))}
         </Carousel>
