@@ -22,7 +22,7 @@
 } */
 
 .bg1{
-    background-image: url('https://source.unsplash.com/7ACuHoezUYk/1920x940');
+    background-image: url('https://source.unsplash.com/oCdVtGFeDC0/1920x940');
     /* background-size:contain; */
     /* background-repeat: no-repeat; */
      /* width: 100px; */
@@ -34,4 +34,12 @@
    background-size: cover;
    background-position: center;
    object-fit: cover;
+}
+
+input {
+    border-radius: 5px;
+}
+
+button {
+    border-radius: 5px;
 }

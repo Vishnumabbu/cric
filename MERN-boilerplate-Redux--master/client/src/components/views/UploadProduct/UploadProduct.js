@@ -46,7 +46,7 @@ function UploadProduct(){
         title:"",
         description:"",
         price:0,
-        type:"bat"
+        type:"asia"
 
     }
 
@@ -83,7 +83,7 @@ function UploadProduct(){
 
     return(
         <div className="bg2" style={{marginTop:110}}>
-            <h3>UploadProduct Page</h3>
+            <h3>Upload Travel Product</h3>
 
         <Formik
              initialValues={initialValues}
@@ -132,17 +132,18 @@ function UploadProduct(){
                 </ErrorMessage>
 
             </div>
+            <div style={{marginTop:'10px', marginBottom: '5px'}}>
+                <Field name="type" as="select" htmlFor='type' placeholder="Type">
+                    <option value="asia">Asia</option>
+                    <option value="europe">Europe</option>
+                    <option value="america">America</option>
+                    <option value="australia">Australia</option>
 
-            <Field name="type" as="select" htmlFor='type' placeholder="Type">
-                <option value="bat">Bat</option>
-                <option value="ball">Ball</option>
-                <option value="stumps">Stumps</option>
-                <option value="gloves">Gloves</option>
-
-            </Field>
-
-            <button type="submit" style={{backgroundColor:'#FF5733',color:'white',borderRadius:'5px'}} disabled={!formik.isValid}>Submit</button>
-
+                </Field>
+            </div>
+            <div>
+                <button type="submit" style={{backgroundColor:'#FF5733',color:'white',borderRadius:'5px'}} disabled={!formik.isValid}>Submit</button>
+            </div>
             </Form>
         )
     }

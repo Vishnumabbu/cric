@@ -11,19 +11,8 @@ function Footer() {
             <div className="footer-center">
               <h2 style={{color:'white'}}>Instagram</h2>
               <div>
-                <a target="_blank " href="https://www.instagram.com/bharath_veldi/">
-                  Bharath
-                </a>
-              </div>
-              <div>
-                <a target="_blank " href="https://www.instagram.com/vishnuvardhan_1111/">Vishnuvardhan</a>
-              </div>
-              <div>
-                <a target="_blank " href="https://www.instagram.com/_sadiq_pasha/">Sadiq Pasha</a>
-              </div>
-              <div>
-                <a target="_blank " href="https://www.instagram.com/____ravi__teja_____/">
-                  RaviTeja
+                <a target="_blank " href="https://www.instagram.com/">
+                  TourVibes
                 </a>
               </div>
             </div>
@@ -32,16 +21,7 @@ function Footer() {
             <div className="footer-center">
               <h2 style={{color:'white'}}>Facebook</h2>
               <div>
-                <a target="_blank" href="https://www.facebook.com/veldi.kuchulu">Bharath</a>
-              </div>
-              <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/vishnuvardhan.reddy.9461">Vishnuvardhan</a>
-              </div>
-              <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sadiqpasha0102">Sadiq Pasha</a>
-              </div>
-              <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/raviteja.madipadiga">RaviTeja</a>
+                <a target="_blank" href="https://www.facebook.com/veldi.kuchulu">TourVibes</a>
               </div>
             </div>
           </Col>
@@ -87,7 +67,7 @@ function Footer() {
       <Row className="bottom-bar" style={{marginTop:30}}>
         <Col lg={4} sm={24} />
         <Col lg={20} sm={24}>          
-          <span style={{ marginRight: 270 }}>Copyright © ecsports</span>
+          <span style={{ marginRight: 270 }}>Copyright © TourVibes</span>
         </Col>
       </Row>
     </footer>

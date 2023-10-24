@@ -62,10 +62,10 @@ function ProductDetail(props){
 
     const renderCards =
         // console.log('HHHH');
-        Products.map(p=>{
+        Products.map((p,index)=>{
             // console.log(p.types)
-            if(p?.types == Product[0]?.types && p?.title != Product[0]?.title){
-                console.log(p)
+            if(index >= 4)return;
+            
                 return <Col lg={6} md={8} xs={24}>
                 <Card
                     hoverable={true}
@@ -78,7 +78,6 @@ function ProductDetail(props){
                 
                 </Card>
             </Col>
-            }
         })
 
     return(
@@ -94,7 +93,7 @@ function ProductDetail(props){
 
             <Descriptions title="Product Info">
                 <Descriptions.Item label="Price"> ${Product[0].price}</Descriptions.Item>
-                <Descriptions.Item label="Sold">{Product[0].sold}</Descriptions.Item>
+                <Descriptions.Item label="People">4</Descriptions.Item>
               
                 <Descriptions.Item label="Description"> {Product[0].description}</Descriptions.Item>
             </Descriptions>
@@ -112,7 +111,7 @@ function ProductDetail(props){
                 Products.length===0?<div></div>:
                 (
                     <div style={{marginTop:'30px',width:'75%'}} >
-                    <h2>Products related to this item</h2>
+                    <h2>Popular tourist destinations for this time of year</h2>
 
                     <Row style={{marginTop:"70px"}} gutter={[16, 16]}>
                         {renderCards}

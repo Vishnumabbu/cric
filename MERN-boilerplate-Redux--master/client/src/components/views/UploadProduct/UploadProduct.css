@@ -12,3 +12,7 @@
    background-position: center;
    object-fit: cover;
 }
+
+input {
+  border-radius: 5px;
+}

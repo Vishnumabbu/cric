@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 
 const User = require('../models/User');
 const auth = require('../middleware/auth');
-const nodemailer = require('nodemailer');
+// const nodemailer = require('nodemailer');
 
 var ObjectId = require('mongodb').ObjectID;
 
@@ -198,29 +198,29 @@ async function main(req) {
     // let testAccount = await nodemailer.createTestAccount();
   
     // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-      service:'gmail',
-    //   secure: false, // true for 465, false for other ports
-      auth: {
-        user: 'ecsports123@gmail.com', // generated ethereal user
-        pass: 'abdabdabd', // generated ethereal password
-      },
-    });
+    // let transporter = nodemailer.createTransport({
+    //   service:'gmail',
+    // //   secure: false, // true for 465, false for other ports
+    //   auth: {
+    //     user: 'ecsports123@gmail.com', // generated ethereal user
+    //     pass: 'abdabdabd', // generated ethereal password
+    //   },
+    // });
   
     // send mail with defined transport object
-    let info = await transporter.sendMail({
-      from:'"Ecsports" <ecsports123@gmail.com>', // sender address
-      to: `${req.user.email},ecsports123@gmail.com`, // list of receivers
-      subject: "New Order Placed", // Subject line
-      text: `From ${req.user.email}`, // plain text body
-      html: "<b>Placed a New Order ,Check the Website</b>", // html body
-    });
+    // let info = await transporter.sendMail({
+    //   from:'"Ecsports" <ecsports123@gmail.com>', // sender address
+    //   to: `${req.user.email},ecsports123@gmail.com`, // list of receivers
+    //   subject: "New Order Placed", // Subject line
+    //   text: `From ${req.user.email}`, // plain text body
+    //   html: "<b>Placed a New Order ,Check the Website</b>", // html body
+    // });
   
-    console.log("Message sent: %s", info.messageId);
+    // console.log("Message sent: %s", info.messageId);
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
   
     // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   }
 

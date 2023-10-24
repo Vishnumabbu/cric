@@ -13,6 +13,7 @@ const { Search } = Input;
 function LandingPage(){
 
     const [Products,setProducts] = useState([]);
+    const [popularProducts, setPopularProducts] = useState([]);
     const [start,setStart] = useState([])
     const [sort,setSort] = useState(false);
     const [filter,setFilter] = useState([1,2,3,4]);
@@ -46,6 +47,7 @@ function LandingPage(){
        
             if(res.data.success){
                 setProducts([...Products,...res.data.products]);
+                setPopularProducts([...popularProducts, ...res.data.products]);
                 setStart([...Products,...res.data.products]);
                 // start=res.data.products;
                 // console.log(start)
@@ -58,6 +60,24 @@ function LandingPage(){
         })
 
     },[])
+
+    const renderCardsPopular = popularProducts.map((product,index)=>{
+        if(index >= 4)return;
+        return <Col lg={6} md={8} xs={24}>
+            <Card
+                hoverable={true}
+                cover={<a href={`/product/${product._id}`} ><ImageSlider images={product.images} /></a> }
+            >
+                <Meta
+                    title={product.title}
+                    description={`$ ${product.price}`}
+                />
+               
+            </Card>
+        </Col>
+
+
+    })
 
     const renderCards = Products.map((product,index)=>{
 
@@ -93,10 +113,10 @@ function LandingPage(){
         const arrange=[];
 
         for(let i=0;i<change.length;i++){
-            if(change[i].types === "bat" && help.indexOf(1)===-1)continue;
-            else if(change[i].types === 'ball' && help.indexOf(2)===-1)continue;
-            else if(change[i].types === 'stumps' && help.indexOf(3)===-1)continue;
-            else if(change[i].types === 'gloves' && help.indexOf(4)===-1)continue;
+            if(change[i].types === "asia" && help.indexOf(1)===-1)continue;
+            else if(change[i].types === 'europe' && help.indexOf(2)===-1)continue;
+            else if(change[i].types === 'america' && help.indexOf(3)===-1)continue;
+            else if(change[i].types === 'australia' && help.indexOf(4)===-1)continue;
 
             else arrange.push(change[i]);
 
@@ -127,14 +147,14 @@ function LandingPage(){
         <div  style={{ width: '75%', margin: '0rem auto',marginTop:"160px",marginBottom:30 }}>
             {loading?<Button type="primary" icon={<PoweroffOutlined />} loading />:(<div>
             <div style={{ textAlign: 'center'}}>
-                <h2>    Products  </h2>
+                <h2>    Let's Travel Anywhere  </h2>
             </div>
 
             <div style={{marginTop:"30px"}} >
-                <Checkbox type="checkbox" checked={filter.indexOf(1)===-1?false:true} onChange={()=>handleChange(1)}>Bat</Checkbox>
-                <Checkbox type="checkbox" checked={filter.indexOf(2)===-1?false:true} onChange={()=>handleChange(2)}>Ball</Checkbox>
-                <Checkbox type="checkbox" checked={filter.indexOf(3)===-1?false:true} onChange={()=>handleChange(3)}>Stumps</Checkbox>
-                <Checkbox type="checkbox" checked={filter.indexOf(4)===-1?false:true} onChange={()=>handleChange(4)}>Gloves</Checkbox>
+                <Checkbox type="checkbox" checked={filter.indexOf(1)===-1?false:true} onChange={()=>handleChange(1)}>Asia</Checkbox>
+                <Checkbox type="checkbox" checked={filter.indexOf(2)===-1?false:true} onChange={()=>handleChange(2)}>Europe</Checkbox>
+                <Checkbox type="checkbox" checked={filter.indexOf(3)===-1?false:true} onChange={()=>handleChange(3)}>America</Checkbox>
+                <Checkbox type="checkbox" checked={filter.indexOf(4)===-1?false:true} onChange={()=>handleChange(4)}>Australia</Checkbox>
             </div>
 
             <Search
@@ -166,6 +186,20 @@ function LandingPage(){
                 </div>
 
            }
+            {
+                popularProducts.length===0?<div></div>:
+                (
+                    <div style={{marginTop:'30px',width:'100%'}} >
+                    <h2>Popular tourist destinations for this time of year</h2>
+
+                    <Row style={{marginTop:"70px"}} gutter={[16, 16]}>
+                        {renderCardsPopular}
+                    </Row>
+                   
+                    </div>
+                )
+
+            }
           </div>)
         }
         </div>

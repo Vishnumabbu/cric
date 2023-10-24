@@ -29,7 +29,7 @@ app.get('/',(req,res)=>{
     res.send('Hello mern stack');
 });
 
-const PORT=5000;
+const PORT=6200;
 
 app.listen(PORT,()=>{
     console.log(`Listening on the port ${PORT}`);

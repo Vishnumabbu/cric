@@ -71,7 +71,7 @@ function RegisterPage(props) {
         {(formik) => {
           return (
             <Form className="container">
-              <h2 style={{color:'white'}}>Register</h2>
+              <h2>Register</h2>
 
               <div className="form-control row">
                 <label style={{ color: "white" }} htmlFor="name">

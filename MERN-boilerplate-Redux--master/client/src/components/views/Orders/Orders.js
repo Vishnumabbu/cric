@@ -91,7 +91,6 @@ const Orders = () => {
                 >
                     <Meta
                         title={order.user[0].name}
-                        description={order.data[0].address.line1+','+order.data[0].address.city}
                         style={{marginBottom:'30px'}}
                     />
 

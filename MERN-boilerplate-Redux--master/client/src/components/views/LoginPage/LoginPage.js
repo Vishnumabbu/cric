@@ -69,7 +69,7 @@ function LoginPage(props) {
         {(formik) => {
           return (
             <Form className="container">
-              <h2 style={{color:'white'}}>Login</h2>
+              <h2>Login</h2>
               <div className="form-control row">
                 <label style={{ color: "white" }} htmlFor="email">
                   {/* email */}

@@ -16,14 +16,12 @@ function AboutPage() {
 
       {/* <p>Hello</p> */}
       <div style={{ marginTop: "460px" }}>
-        <h3 style={{ color: "white" }}>BORN TO PLAY</h3>
+        <h3 style={{ color: "white", fontWeight: 600 }}>Plan your trip with TourVibes</h3>
         <Button type="danger">
-          <a href="/products">Learn More</a>
+          <a style={{fontWeight: 600}} href="/products">Explore Now</a>
         </Button>
-        <p style={{marginTop:'40px'}}>
-          “Thanks to BigCommerce, we scaled our business from our very first
-          order to now a recognized brand, and the platform is able to grow with
-          us as we need it to.” — Our Team
+        <p style={{marginTop:'40px', fontWeight: 600}}>
+          “Travel to your favourite city with respectful of the environment!.” — Our Team
         </p>
       </div>
     </div>
